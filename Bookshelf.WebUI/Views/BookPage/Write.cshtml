@@ -1,0 +1,42 @@
+﻿@model Bookshelf.WebUI.Models.BookPage.BookPageModel;
+<div class="col-12 grid-margin stretch-card">
+    <div class="card">
+        <div class="card-body">
+            <h4 class="card-title">@ViewBag.title</h4>
+            <p class="card-description">
+            </p>
+            <warning title="Uyarı" message="@Context.Request.Query["message"]" status="@Context.Request.Query["status"]"></warning>
+            <form class="forms-sample" asp-controller="BookPage" asp-action="Write">
+
+
+                <input type="text" asp-for="BookPage.BookID" hidden />
+                <input type="text" asp-for="BookPage.BookPageID" hidden />
+                <div class="text-right">
+                    <button type="submit" class="btn btn-danger btn-fw font-weight-bold text-white"><i class="fa fa-plus"></i> Kaydet</button>
+                    <a asp-controller="Book" asp-action="Index" asp-route-ID="@Model.BookPage.BookID" class="btn btn-light">İptal</a>
+                </div>
+
+                <div class="form-group">
+                    <label asp-for="BookPage.BookPageTitle"></label>
+                    <input type="text" class="form-control" asp-for="BookPage.BookPageTitle">
+                    <span class="text-danger" asp-validation-for="BookPage.BookPageTitle"></span>
+                </div>
+
+                <div class="form-group">
+                    <label asp-for="BookPage.BookPageText"></label>
+                    <textarea style="min-height:500px" class="form-control" asp-for="BookPage.BookPageText" row="20"  id="maxlength-textarea" maxlength="5000"></textarea>
+                    <span class="text-danger" asp-validation-for="BookPage.BookPageText"></span>
+                </div>
+
+                <script>
+                    ClassicEditor.create(document.getElementById("maxlength-textarea") );
+                </script>
+
+                <div class="text-right">
+                    <button type="submit" class="btn btn-danger btn-fw font-weight-bold text-white"><i class="fa fa-plus"></i> Kaydet</button>
+                    <a asp-controller="Book" asp-action="Index" asp-route-ID="@Model.BookPage.BookID" class="btn btn-light">İptal</a>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>

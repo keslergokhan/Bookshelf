@@ -1,0 +1,62 @@
+﻿@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+@model Bookshelf.WebUI.Models.User.UserProfileViewModel;
+
+<div class="col-12 grid-margin stretch-card">
+    <div class="card">
+        <div class="card-body">
+            <h4 class="card-title">@Model.User.UserName @Model.User.UserSurname</h4>
+            <p class="card-description">
+            </p>
+            <warning title="Uyarı" message="@Context.Request.Query["message"]" status="@Context.Request.Query["status"]"></warning>
+            <form class="forms-sample" asp-controller="User" asp-action="ProfilUpdate" method="POST" enctype="multipart/form-data">
+                <div class="text-right">
+                    <button type="submit" class="btn btn-danger btn-fw font-weight-bold text-white"><i class="fa fa-plus"></i> Güncelle</button>
+                    <a asp-controller="Bookshelf" asp-action="Index" class="btn btn-light">İptal</a>
+                </div>
+
+                <div class="form-group">
+                    <label asp-for="User.UserImg"></label>
+                    <div class="mt-1 mb-1">
+                        @{
+                            if (String.IsNullOrEmpty(Model.User.UserImg))
+                            {
+                                <i class="fa fa-user"></i>
+                            }
+                            else
+                            {
+                                <img width="75px" src="~/dimg/User/@Model.User.UserImg" title="Eski Resim">
+                            }
+                        }
+                    </div>
+                    <input type="file" class="dropify" name="UserImg" />
+                </div>
+
+                <div class="form-group">
+                    <label asp-for="User.UserNewPassword"></label>
+                    <input type="text" class="form-control" asp-for="User.UserNewPassword">
+                    <span class="text-danger" asp-validation-for="User.UserNewPassword"></span>
+                </div>
+
+                <div class="form-group">
+                    <label asp-for="User.UserPasswordControl"></label>
+                    <input type="text" class="form-control" asp-for="User.UserPasswordControl">
+                    <span class="text-danger" asp-validation-for="User.UserPasswordControl"></span>
+                </div>
+
+                <div class="form-group">
+                    <label asp-for="User.UserPassword"></label>
+                    <input type="text" class="form-control" asp-for="User.UserPassword">
+                    <span class="text-danger" asp-validation-for="User.UserPassword"></span>
+                </div>
+
+                <div class="text-right">
+                    <button type="submit" class="btn btn-danger btn-fw font-weight-bold text-white"><i class="fa fa-plus"></i> Güncelle</button>
+                    <a asp-controller="Bookshelf" asp-action="Index" class="btn btn-light">İptal</a>
+                </div>
+
+            </form>
+        </div>
+    </div>
+</div>
